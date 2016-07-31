@@ -113,7 +113,7 @@ function apiRequestJson($method, $parameters) {
   if($method == "sendPhoto"){
 	//$parameters['photo']= '@'.$parameters['photo'].';type=image/gif';
 	$parameters["photo"] = new CURLFile($parameters["photo"]);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+	curl_setopt($handle, CURLOPT_HTTPHEADER, array(
 		"Content-Type:multipart/form-data"
 	));
   }

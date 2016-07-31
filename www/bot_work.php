@@ -124,6 +124,40 @@ function apiRequestJson($method, $parameters) {
   return exec_curl_request($handle);
 }
 
+function apiRequestPhoto($chat_id, $photo) {
+  if (!is_string($method)) {
+    error_log("Method name must be a string\n");
+    return false;
+  }
+
+  if (!$parameters) {
+    $parameters = array();
+  } else if (!is_array($parameters)) {
+    error_log("Parameters must be an array\n");
+    return false;
+  }
+
+  $parameters["method"] = $method;
+  
+  $url = API_URL . "sendPhoto?chat_id=" . $chat_id ;
+  
+  $post_fields = array('chat_id'   => $chat_id,
+      'photo'     => new CURLFile($photo)
+  );
+  
+  $ch = curl_init(); 
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      "Content-Type:multipart/form-data"
+  ));
+  curl_setopt($ch, CURLOPT_URL, $url); 
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields); 
+  
+  $output = curl_exec($ch);
+  
+  
+}
+
 function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
@@ -144,7 +178,7 @@ function processMessage($message) {
     } else if (stripos($text, "carica!") === 0) {
       // stop now
 	  //gif\faizon_charge.gif
-	  apiRequestJson("sendPhoto", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "photo" => realpath("gif/faizon_charge.gif")));
+	  apiRequestPhoto( $chat_id, realpath("gif/faizon_charge.gif")));
     } else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }

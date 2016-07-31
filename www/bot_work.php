@@ -125,20 +125,7 @@ function apiRequestJson($method, $parameters) {
 }
 
 function apiRequestPhoto($chat_id, $photo) {
-  if (!is_string($method)) {
-    error_log("Method name must be a string\n");
-    return false;
-  }
 
-  if (!$parameters) {
-    $parameters = array();
-  } else if (!is_array($parameters)) {
-    error_log("Parameters must be an array\n");
-    return false;
-  }
-
-  $parameters["method"] = $method;
-  
   $url = API_URL . "sendPhoto?chat_id=" . $chat_id ;
   
   $post_fields = array('chat_id'   => $chat_id,

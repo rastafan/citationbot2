@@ -124,12 +124,12 @@ function apiRequestJson($method, $parameters) {
   return exec_curl_request($handle);
 }
 
-function apiRequestPhoto($chat_id, $photo) {
+function apiRequestDocument($chat_id, $photo) {
 
-  $url = API_URL . "sendPhoto?chat_id=" . $chat_id ;
+  $url = API_URL . "sendDocument?chat_id=" . $chat_id ;
   
   $post_fields = array('chat_id'   => $chat_id,
-      'photo'     => new CURLFile($photo)
+      'document'     => new CURLFile($photo)
   );
   
   $ch = curl_init(); 
@@ -165,7 +165,7 @@ function processMessage($message) {
     } else if (stripos($text, "carica!") === 0) {
       // stop now
 	  //gif\faizon_charge.gif
-	  apiRequestPhoto( $chat_id, realpath("gif/faizon_charge.gif"));
+	  apiRequestDocument( $chat_id, realpath("gif/faizon_charge.gif"));
     } else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }

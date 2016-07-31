@@ -103,15 +103,21 @@ function apiRequestJson($method, $parameters) {
 
   $parameters["method"] = $method;
   
-  if($method == "sendPhoto"){
-	$parameters['photo']= '@'.$parameters['photo'].';type=image/gif';
-	$parameters['photo']= new CurlFile($parameters['photo'], 'image/gif');
-  }
+
 
   $handle = curl_init(API_URL);
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+  
+  if($method == "sendPhoto"){
+	//$parameters['photo']= '@'.$parameters['photo'].';type=image/gif';
+	$parameters["photo"] = new CURLFile($parameters["photo"]);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		"Content-Type:multipart/form-data"
+	));
+  }
+  
   curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
   curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
 

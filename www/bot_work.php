@@ -148,7 +148,7 @@ function processMessage($message) {
 }
 
 
-define('WEBHOOK_URL', 'https://citationbot-faizonbot.rhcloud.com/www/bot_work.php');
+define('WEBHOOK_URL', 'https://citationbot2-faizonbot.rhcloud.com/www/bot_work.php');
 
 if (php_sapi_name() == 'cli') {
   // if run from console, set or delete webhook

@@ -178,7 +178,7 @@ function processMessage($message) {
     } else if (stripos($text, "carica!") === 0) {
       // stop now
 	  //gif\faizon_charge.gif
-	  apiRequestPhoto( $chat_id, realpath("gif/faizon_charge.gif")));
+	  apiRequestPhoto( $chat_id, realpath("gif/faizon_charge.gif"));
     } else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }

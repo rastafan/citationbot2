@@ -88,7 +88,7 @@ function apiRequest($method, $parameters) {
   return exec_curl_request($handle);
 }
 
-function apiRequestJson($method, $parameters) {
+function apiRequestJson($method, $parameters, $message_id) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
     return false;
@@ -128,8 +128,10 @@ function apiRequestDocument($chat_id, $photo) {
 
   $url = API_URL . "sendDocument?chat_id=" . $chat_id ;
   
-  $post_fields = array('chat_id'   => $chat_id,
-      'document'     => new CURLFile($photo)
+  $post_fields = array(
+		'chat_id'   => $chat_id,
+		'document'     => new CURLFile($photo),
+		'reply_to_message_id' => $message_id
   );
   
   $ch = curl_init(); 
@@ -165,7 +167,7 @@ function processMessage($message) {
     } else if (stripos($text, "carica!") === 0) {
       // stop now
 	  //gif\faizon_charge.gif
-	  apiRequestDocument( $chat_id, realpath("gif/faizon_charge.gif"));
+	  apiRequestDocument($chat_id, realpath("gif/faizon_charge.gif"),$message_id);
     } else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }

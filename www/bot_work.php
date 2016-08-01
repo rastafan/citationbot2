@@ -130,8 +130,8 @@ function apiRequestDocument($chat_id, $photo, $message_id) {
   
   $post_fields = array(
 		'chat_id'   => $chat_id,
-		//'document'     => new CURLFile($photo),
-		'document' => "BQADBAADCQADNi25DZOrAyaIej3gAg",
+		'document'     => new CURLFile($photo),
+		//'document' => "BQADBAADCQADNi25DZOrAyaIej3gAg",
 		'reply_to_message_id' => $message_id
   );
   

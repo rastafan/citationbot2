@@ -124,13 +124,14 @@ function apiRequestJson($method, $parameters, $message_id) {
   return exec_curl_request($handle);
 }
 
-function apiRequestDocument($chat_id, $photo) {
+function apiRequestDocument($chat_id, $photo, $message_id) {
 
   $url = API_URL . "sendDocument?chat_id=" . $chat_id ;
   
   $post_fields = array(
 		'chat_id'   => $chat_id,
-		'document'     => new CURLFile($photo),
+		//'document'     => new CURLFile($photo),
+		'document' => "BQADBAADCQADNi25DZOrAyaIej3gAg",
 		'reply_to_message_id' => $message_id
   );
   

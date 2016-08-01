@@ -144,6 +144,8 @@ function apiRequestDocument($chat_id, $photo) {
   
   $output = curl_exec($ch);
   
+  error_log($output);
+  
   
 }
 

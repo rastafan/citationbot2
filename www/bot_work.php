@@ -171,6 +171,8 @@ function processMessage($message) {
       // stop now
 	  //gif\faizon_charge.gif
 	  apiRequestDocument($chat_id, realpath("gif/faizon_charge.gif"),$message_id);
+    }else if (stripos($text, "eh!") === 0) {
+      apiRequestDocument($chat_id, realpath("gif/eh_volevi.gif"),$message_id);
     } /*else {
       apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
     }*/
